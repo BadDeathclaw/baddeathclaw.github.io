@@ -1,1 +1,165 @@
-TESTING.PLEASE IGNORE FOR NOW
+<!DOCTYPE>
+<html>
+	<head>
+		<title>Bad-Deathclaw13: TG edition</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="icon" type="image/png" href="assets/tgclaw-logo.png">
+		<link href="assets/bootstrap.min.css" rel="stylesheet">
+		<link href="assets/custom.css" rel="stylesheet">
+
+		<script type="text/javascript"> /*from tg, to make the server check thingy work*/
+			function getCookie (cname) {
+				var name = cname + "=";
+				var ca = document.cookie.split(';');
+				for(var i=0; i<ca.length; i++) {
+					var c = ca[i].trim();
+					if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+				}
+				return "";
+			} 
+			
+			var refreshjobs = [];
+			
+			function setupreloader (servernum, target, refreshtime) {
+				if (refreshjobs.length <= servernum)
+					refreshjobs.length = servernum+1;
+				if (refreshjobs[servernum])
+					return
+				var refreshjob = {
+					num: servernum,
+					timer: null,
+					target: target,
+					refreshtime: refreshtime
+				};
+				refreshjobs[servernum] = refreshjob;
+				reloadimg(refreshjob);
+			}
+			
+			function displayrefreshstatus () {
+				if (getCookie("disablerefresh")) {
+					document.getElementById("refreshstatus").innerHTML="<span style=\"color:red;font-weight:bold;\">Disabled</span>";
+					return;
+				}
+				document.getElementById("refreshstatus").innerHTML="<span style=\"color:green;font-weight:bold;\">Enabled</span>";
+				return;
+			}
+			
+			function kick_reload_jobs() {
+				var arrayLength = refreshjobs.length;
+				for (var i = 0; i < arrayLength; i++) {
+					var refreshjob = refreshjobs[i];
+					if (refreshjob && refreshjob.timer)
+						reloadimg(refreshjob);
+				}
+			}
+			
+			function refreshtoggleclick () {
+				if (getCookie("disablerefresh")) {
+					document.cookie="disablerefresh=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+					kick_reload_jobs();
+					displayrefreshstatus();
+					return;
+				}
+				document.cookie="disablerefresh=1; expires=Thu, 2038-01-19 04:14:00 GMT; path=/";
+				displayrefreshstatus();
+			}
+			
+			function reloadimg (refreshjob) {
+				var target = refreshjob.target;
+				var refreshtime = refreshjob.refreshtime;
+				var servernum = refreshjob.num
+				if (!getCookie("disablerefresh")) 
+					target.src = "gamebanner.php?servernum=" + servernum + "&rand=" + Math.random();
+				else
+					refreshtime = refreshtime*60;
+				if (document.hidden || !iSeeYou)
+					refreshtime = refreshtime*60;
+				if (DevilsWorkshopLvl)
+					refreshtime = refreshtime*DevilsWorkshopLvl;
+				clearTimeout(refreshjob.timer);
+				refreshjob.timer = setTimeout(function () {reloadimg(refreshjob)}, Math.floor((Math.random() * (refreshtime*1.5)) + refreshtime));
+			}
+			
+			var devilInterval = 0;
+			var DevilsWorkshopLvl = 0;
+			document.onmousemove = function () {
+				if (DevilsWorkshopLvl) {
+					kick_reload_jobs();
+				}
+				clearInterval(devilInterval);
+				DevilsWorkshopLvl = 0;
+				devilInterval = setInterval(function(){isDevilsWorkshop++;}, 60000);
+			}
+			var iSeeYou = 1;
+			
+			window.onfocus = function () { 
+				iSeeYou = 1;
+				kick_reload_jobs();
+			};
+			
+			window.onblur = function () { 
+				iSeeYou = 0;
+			}; 
+		</script>
+	</head>
+	<body onload="displayrefreshstatus();">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary text-center">
+			<img src="assets/tgclaw-logo.png" class="logo"></img>
+			<a class="navbar-brand" href="#">Bad-Deathclaw13: TG edition</a>
+			<div class="container-fluid center text-center">
+			  <ul class="nav navbar-nav center text-center">
+				<li class="nav-item active">
+				  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="https://tgstation13.org/wiki">Wiki</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="https://www.patreon.com/baddeathclaw">Patreon</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="#">Rules</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="https://github.com/BadDeathclaw/TG-Claw">Github</a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link" href="#">Discord</a>
+				</li>
+			  </ul>
+			</div>
+		</nav>
+
+			<div class="alert alert-danger text-center">
+				<strong>Hey! Listen!</strong><br>
+					This shit is under construction. Expect bugs
+			</div>
+
+		<!--
+			<div class="alert alert-danger text-center">
+				<strong>Hey! Listen!</strong><br>
+					Server is about to go downtime, for more information, check the <a>discord</a>.
+			</div>
+		-->
+		<div class="jumbotron"  align="center">
+			<p class="lead">You have byond? click that thing bellow.</p>
+			<a href=byond://45.55.56.134:1945>
+				<img class="gamebanner" src="gamebanner.php?servernum=1" onload="setupreloader(1, event.target, 1117)">
+			</a>
+			<p align="center">
+				<sup>Green = New round lobby, Blue = Round in progress, Red = Round over or error</sup>
+			</p>
+			<p class="text-success">Our server runs on tgcode, which is turned into <a href="https://github.com/BadDeathclaw/bad-deathclaw">falloutcode</a>, then turned <br>into somewhat <a href="https://github.com/tgstation/tgtation">latest-tgcode</a>, and turned into <a href="https://github.com/BadDeathclaw/TG-Claw">falloutcode</a>
+			</p>
+			<p align="center">Game Banner Auto Update: <span id="refreshstatus"></span> 
+				<a href="#" onclick="refreshtoggleclick();return false;">(toggle)</a>
+			</p>
+			<p>
+				<a class="btn btn-primary btn-lg" href="https://secure.byond.com/download/?invite=Tgstation" target="ext">Get BYOND</a> 
+				<a class="btn btn-primary btn-lg" href="/wiki/Downloading_the_source_code#Hosting_a_server" target="ext">Host a Server</a>
+			</p>
+		</div>
+
+	</body>
+</html>
