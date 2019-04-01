@@ -89,7 +89,7 @@
 				}
 				clearInterval(devilInterval);
 				DevilsWorkshopLvl = 0;
-				devilInterval = setInterval(function(){DevilsWorkshop++;}, 60000);
+				devilInterval = setInterval(function(){DevilsWorkshopLvl++;}, 60000);
 			}
 			var iSeeYou = 1;
 			
@@ -145,7 +145,7 @@
 		<div class="jumbotron"  align="center">
 			<p class="lead">You have byond? click that thing bellow.</p>
 			<a href=byond://45.55.56.134:1945>
-				<img class="gamebanner" src="gamebanner.php?servernum=1" onload="setupreloader(1, event.target, 1117)">
+				<img class="gamebanner" src="gamebanner.php?servernum=0" onload="setupreloader(0, event.target, 20)">
 			</a>
 			<p align="center">
 				<sup>Green = New round lobby, Blue = Round in progress, Red = Round over or error</sup>

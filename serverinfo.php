@@ -28,10 +28,10 @@
     //Copy paste the code above to after this line
      
     //(not)Basil
-    $servers[1] = Array();
-    $servers[1]["address"] = "45.55.56.134";
-    $servers[1]["port"] = 1945;
-    $servers[1]["servername"] = "TGClaw server";
+    $servers[0] = Array();
+    $servers[0]["address"] = "45.55.56.134";
+    $servers[0]["port"] = 1945;
+    $servers[0]["servername"] = "TGClaw server";
     //$servers[1]["errortext"] = "Blame hostbuss.";
 
  ///\/ you see this shit right here, that closing php tag, it better be the last thing in the file
